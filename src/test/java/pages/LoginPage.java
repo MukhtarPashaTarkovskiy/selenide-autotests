@@ -1,7 +1,9 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+
 import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -16,37 +18,45 @@ public class LoginPage {
     final SelenideElement forgotPasswordLink = $("#login-forgot-password");
     final SelenideElement registerLink = $("#login-register");
 
-    public void openPage() {
+    public LoginPage openPage() {
         open("practice-login-form");
+        return this;
     }
 
-    public void login(String email, String password) {
-      emailInput.setValue(email);
-      passwordInput.setValue(password);
-      loginButton.click();
+    public LoginPage login(String email, String password) {
+        emailInput.setValue(email);
+        passwordInput.setValue(password);
+        loginButton.click();
+        return this;
     }
 
-    public void waitPageOpened() {
+    public LoginPage waitPageOpened() {
         pageTitle.should(exist).shouldBe(visible, Duration.ofSeconds(10));
+        return this;
     }
 
-    public void checkSuccessMessage(String expectedMessage) {
+    public LoginPage checkSuccessMessage(String expectedMessage) {
         successMessage.shouldHave(exactText(expectedMessage));
+        return this;
     }
 
-    public void checkErrorMessage(String expectedMessage) {
+    public LoginPage checkErrorMessage(String expectedMessage) {
         errorMessage.shouldHave(exactText(expectedMessage));
+        return this;
     }
 
-    public void checkPasswordIsMasked() {
-        passwordInput.shouldHave(attribute("type","password"));
+    public LoginPage checkPasswordIsMasked() {
+        passwordInput.shouldHave(attribute("type", "password"));
+        return this;
     }
 
-    public void clickForgotPassword() {
+    public ForgotPasswordPage clickForgotPassword() {
         forgotPasswordLink.click();
+        return new ForgotPasswordPage();
     }
 
-    public void clickRegister() {
+    public RegistrationPage clickRegister() {
         registerLink.click();
+        return new RegistrationPage();
     }
 }

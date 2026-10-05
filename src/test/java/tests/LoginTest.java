@@ -3,6 +3,7 @@ package tests;
 import data.TestData;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
 public class LoginTest extends BaseTest {
 
@@ -18,40 +19,45 @@ public class LoginTest extends BaseTest {
 
     @Test(dataProvider = "invalidLoginData")
     public void invalidLoginTest(String email, String password, String expectedMessage) {
-        loginPage.openPage();
-        loginPage.waitPageOpened();
-        loginPage.login(email, password);
-        loginPage.checkErrorMessage(expectedMessage);
+        loginPage
+                .openPage()
+                .waitPageOpened()
+                .login(email, password)
+                .checkErrorMessage(expectedMessage);
     }
 
     @Test
     public void successfulLoginTest() {
-        loginPage.openPage();
-        loginPage.waitPageOpened();
-        loginPage.login(TestData.EMAIL, TestData.PASSWORD);
-        loginPage.checkSuccessMessage(TestData.SUCCESS_LOGIN_MESSAGE);
+        loginPage
+                .openPage()
+                .waitPageOpened()
+                .login(TestData.EMAIL, TestData.PASSWORD)
+                .checkSuccessMessage(TestData.SUCCESS_LOGIN_MESSAGE);
     }
 
     @Test
     public void passwordIsMaskedTest() {
-        loginPage.openPage();
-        loginPage.waitPageOpened();
-        loginPage.checkPasswordIsMasked();
+        loginPage
+                .openPage()
+                .waitPageOpened()
+                .checkPasswordIsMasked();
     }
 
     @Test
     public void forgotPasswordNavigationTest() {
-        loginPage.openPage();
-        loginPage.waitPageOpened();
-        loginPage.clickForgotPassword();
-        forgotPasswordPage.checkPageOpened();
+        loginPage
+                .openPage()
+                .waitPageOpened()
+                .clickForgotPassword()
+                .checkPageOpened();
     }
 
     @Test
     public void registrationNavigationTest() {
-        loginPage.openPage();
-        loginPage.waitPageOpened();
-        loginPage.clickRegister();
-        registrationPage.checkPageOpened();
+        loginPage
+                .openPage()
+                .waitPageOpened()
+                .clickRegister()
+                .checkPageOpened();
     }
 }
